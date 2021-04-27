@@ -4,14 +4,14 @@
 #include <EEPROM.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "patch_init.h"       // SSB patch for whole SSBRX initialization string
+#include "patch_ssb_compressed.h"       // SSB patch for whole SSBRX initialization string
 #define I2C_ADDRESS   0x3C    // OLED I2C address
 #define SCREEN_WIDTH  128     // OLED display width, in pixels
 #define SCREEN_HEIGHT  64     // OLED display height, in pixels
 #define OLED_RESET    4       // Reset pin # (or -1 if sharing Arduino reset pin)
 #define MIN_ELAPSED_TIME  150
 #define ELAPSED_COMMAND  3000
-#define IF_FM  65500          //72300 //Enter your IF frequency, from: 64000 to 108000, 0 = to direct convert receiver or RF generator, + will add and - will subtract IF offfset.
+#define IF_FM  65700          //72300 //Enter your IF frequency, from: 64000 to 108000, 0 = to direct convert receiver or RF generator, + will add and - will subtract IF offfset.
 #define IF  10700             //Enter your IF frequency, ex: 455 = 455kHz, 10700 = 10.7MHz, 0 = to direct convert receiver or RF generator, + will add and - will subtract IF offfset.
 #define FREQ_INIT  9300000    //Enter your initial frequency at startup, ex: 7000000 = 7MHz, 10000000 = 10MHz, 840000 = 840kHz.
 #define XT_CAL_F  39000       //Si5351 calibration factor, adjust to get exatcly 10MHz. 
@@ -135,7 +135,7 @@ void setup() {
     currentMode = "FM";
     //si4735.reset();
     si4735.setTuneFrequencyAntennaCapacitor(0);
-    si4735.setFM(6500, 6600, IF_FM/10, 1);
+    si4735.setFM(6500, 6600, IF_FM / 10, 1);
     ssbload = 0;
   }
   if (Mo == 2)
@@ -194,6 +194,12 @@ void setup() {
       si4735.setSBBSidebandCutoffFilter(0);
       BandWidth = "0.5kHz";
     }
+    if (currentMode == "FM")
+    {
+      si4735.setFmBandwidth(0);
+      BandWidth = "Auto";
+      delay (200);
+    }
   }
   if (Filter == 2)
   {
@@ -209,6 +215,12 @@ void setup() {
       si4735.setSSBAudioBandwidth(5);
       si4735.setSBBSidebandCutoffFilter(0);
       BandWidth = "1kHz";
+    }
+    if (currentMode == "FM")
+    {
+      si4735.setFmBandwidth(1);
+      BandWidth = "110kHz";
+      delay (200);
     }
   }
   if (Filter == 3)
@@ -226,6 +238,12 @@ void setup() {
       si4735.setSBBSidebandCutoffFilter(0);
       BandWidth = "1.2kHz";
     }
+    if (currentMode == "FM")
+    {
+      si4735.setFmBandwidth(2);
+      BandWidth = "84kHz";
+      delay (200);
+    }
   }
   if (Filter == 4)
   {
@@ -242,6 +260,12 @@ void setup() {
       si4735.setSBBSidebandCutoffFilter(1);
       BandWidth = "2.2kHz";
     }
+    if (currentMode == "FM")
+    {
+      si4735.setFmBandwidth(3);
+      BandWidth = "60kHz";
+      delay (200);
+    }
   }
   if (Filter == 5)
   {
@@ -257,6 +281,12 @@ void setup() {
       si4735.setSSBAudioBandwidth(2);
       si4735.setSBBSidebandCutoffFilter(1);
       BandWidth = "3kHz";
+    }
+    if (currentMode == "FM")
+    {
+      si4735.setFmBandwidth(4);
+      BandWidth = "40kHz";
+      delay (200);
     }
   }
   if (Filter == 6)
@@ -518,7 +548,7 @@ void menuCheck() {
         currentMode = "FM";
         //si4735.reset();
         si4735.setTuneFrequencyAntennaCapacitor(0);
-        si4735.setFM(6500, 6600, IF_FM/10, 1);
+        si4735.setFM(6500, 6600, IF_FM / 10, 1);
         ssbload = 0;
       }
     }
@@ -603,6 +633,15 @@ void menuCheck() {
           delay (200);
         }
       }
+      if (currentMode == "FM")
+      {
+        if (BandWidth != "Auto")
+        {
+          si4735.setFmBandwidth(0);
+          BandWidth = "Auto";
+          delay (200);
+        }
+      }
     }
     if (encoder0Pos == 2)
     {
@@ -623,6 +662,15 @@ void menuCheck() {
           si4735.setSSBAudioBandwidth(5);
           si4735.setSBBSidebandCutoffFilter(0);
           BandWidth = "1kHz";
+          delay (200);
+        }
+      }
+      if (currentMode == "FM")
+      {
+        if (BandWidth != "110kHz")
+        {
+          si4735.setFmBandwidth(1);
+          BandWidth = "110kHz";
           delay (200);
         }
       }
@@ -649,6 +697,15 @@ void menuCheck() {
           delay (200);
         }
       }
+      if (currentMode == "FM")
+      {
+        if (BandWidth != "84kHz")
+        {
+          si4735.setFmBandwidth(2);
+          BandWidth = "84kHz";
+          delay (200);
+        }
+      }
     }
     if (encoder0Pos == 4)
     {
@@ -672,6 +729,15 @@ void menuCheck() {
           delay (200);
         }
       }
+      if (currentMode == "FM")
+      {
+        if (BandWidth != "60kHz")
+        {
+          si4735.setFmBandwidth(3);
+          BandWidth = "60kHz";
+          delay (200);
+        }
+      }
     }
     if (encoder0Pos == 5)
     {
@@ -692,6 +758,15 @@ void menuCheck() {
           si4735.setSSBAudioBandwidth(2);
           si4735.setSBBSidebandCutoffFilter(1);
           BandWidth = "3kHz";
+          delay (200);
+        }
+      }
+      if (currentMode == "FM")
+      {
+        if (BandWidth != "40kHz")
+        {
+          si4735.setFmBandwidth(4);
+          BandWidth = "40kHz";
           delay (200);
         }
       }

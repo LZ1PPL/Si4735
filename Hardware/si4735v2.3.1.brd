@@ -2659,7 +2659,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="20.828" y="26.289" size="1.27" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="18.288" y="20.828" size="1.27" layer="28" rot="MR0"/>
 </element>
-<element name="EEPROM" library="microchip" library_urn="urn:adsk.eagle:library:294" package="SO-08M" package3d_urn="urn:adsk.eagle:package:20798/2" value="24C64SM" x="10.922" y="63.373" smashed="yes" rot="MR0">
+<element name="EEPROM" library="microchip" library_urn="urn:adsk.eagle:library:294" package="SO-08M" package3d_urn="urn:adsk.eagle:package:20798/2" value="24C256" x="10.922" y="63.373" smashed="yes" rot="MR0">
 <attribute name="MF" value="RAMTRON INTERNATIONAL CORP" x="-6.858" y="4.953" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MPN" value="FM24C64-S" x="-6.858" y="4.953" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="NAME" x="15.24" y="62.738" size="1.27" layer="26" rot="MR0"/>

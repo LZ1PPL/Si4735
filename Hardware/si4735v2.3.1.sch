@@ -23017,7 +23017,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J2" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="USB_MICRO-B" device="REDUCED_PASTE" package3d_urn="urn:adsk.eagle:package:38239/1"/>
 <part name="GND33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="EEPROM" library="microchip" library_urn="urn:adsk.eagle:library:294" deviceset="24*" device="SM" package3d_urn="urn:adsk.eagle:package:20798/2" technology="C64"/>
+<part name="EEPROM" library="microchip" library_urn="urn:adsk.eagle:library:294" deviceset="24*" device="SM" package3d_urn="urn:adsk.eagle:package:20798/2" technology="C64" value="24C256"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SUPPLY14" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="3.3V" device=""/>
